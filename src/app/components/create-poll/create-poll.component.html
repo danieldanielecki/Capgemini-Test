@@ -1,0 +1,47 @@
+<section *ngIf="error$ | async as error">
+  <h1>{{ error }}</h1>
+</section>
+<form [formGroup]="votesForm" (ngSubmit)="onSubmit()">
+  <input
+    type="text"
+    formControlName="title"
+    placeholder="Add your vote"
+    required
+  />
+  <button
+    *ngIf="votes$ | async as votes"
+    [disabled]="votes.length >= 10"
+    type="submit"
+  >
+    Add Vote
+  </button>
+</form>
+
+<section *ngIf="votes$ | async as votes">
+  <ul *ngFor="let vote of votes">
+    <li>
+      <button (click)="deleteVote(vote)">X</button>
+      <span>{{ vote.title }}</span>
+    </li>
+  </ul>
+</section>
+<section *ngIf="votes$ | async as votes">
+  <ul *ngFor="let vote of votes">
+    <li>
+      <input type="radio" value="{{ vote.title }}" />
+      <label for="{{ vote.title }}">{{ vote.title }}</label>
+    </li>
+  </ul>
+</section>
+<div style="display: block; height: 300px">
+  <canvas
+    baseChart
+    [datasets]="barChartData"
+    [labels]="barChartLabels"
+    [options]="barChartOptions"
+    [plugins]="barChartPlugins"
+    [legend]="barChartLegend"
+    [chartType]="barChartType"
+  >
+  </canvas>
+</div>
