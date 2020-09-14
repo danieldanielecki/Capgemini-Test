@@ -21,27 +21,23 @@
   <ul *ngFor="let vote of votes">
     <li>
       <button (click)="deleteVote(vote)">X</button>
+      <button (click)="editVote(vote)">edit</button>
       <span>{{ vote.title }}</span>
     </li>
-  </ul>
-</section>
-<section *ngIf="votes$ | async as votes">
-  <ul *ngFor="let vote of votes">
-    <li>
-      <input type="radio" value="{{ vote.title }}" />
+    <ol *ngIf="votes.length > 0">
+      <input type="radio" value="{{ vote.title }}" (click)="onVote(vote)" />
       <label for="{{ vote.title }}">{{ vote.title }}</label>
-    </li>
+    </ol>
   </ul>
+  <div style="display: block; height: 300px">
+    <canvas
+      baseChart
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [legend]="barChartLegend"
+      [chartType]="barChartType"
+    >
+    </canvas>
+  </div>
 </section>
-<div style="display: block; height: 300px">
-  <canvas
-    baseChart
-    [datasets]="barChartData"
-    [labels]="barChartLabels"
-    [options]="barChartOptions"
-    [plugins]="barChartPlugins"
-    [legend]="barChartLegend"
-    [chartType]="barChartType"
-  >
-  </canvas>
-</div>

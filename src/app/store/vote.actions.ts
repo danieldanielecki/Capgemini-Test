@@ -23,3 +23,8 @@ export const errorItem = createAction(
   VotesActionTypes.ERROR_VOTE,
   props<{ error: string }>()
 );
+
+export const editVote = createAction(
+  VotesActionTypes.EDIT_VOTE,
+  props<{ vote: Vote }>()
+);

@@ -1,6 +1,7 @@
 export enum VotesActionTypes {
   ADD_VOTE = "ADD_VOTE",
   DELETE_VOTE = "DELETE_VOTE",
+  EDIT_VOTE = "EDIT_VOTE",
   ERROR_VOTE = "ERROR_VOTE",
   GET_VOTES = "GET_VOTES",
   LOAD_VOTES = "LOAD_VOTES",

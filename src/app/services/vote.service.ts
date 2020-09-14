@@ -40,4 +40,15 @@ export class VoteService {
     });
     window.localStorage.setItem("votes", JSON.stringify(saved));
   }
+
+  editVote(deleteVote) {
+    const votes = JSON.parse(window.localStorage.getItem("votes"));
+    console.log(votes);
+    console.log(deleteVote);
+    console.log("voteid", deleteVote.id);
+    const saved = votes.filter((vote) => {
+      return vote.id !== deleteVote.id;
+    });
+    window.localStorage.setItem("votes", JSON.stringify(saved));
+  }
 }

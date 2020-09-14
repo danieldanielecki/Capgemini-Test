@@ -1,5 +1,5 @@
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { addVote, deleteVote, getVotes } from "./vote.actions";
+import { addVote, deleteVote, editVote, getVotes } from "./vote.actions";
 import { catchError, switchMap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { of } from "rxjs";
@@ -40,6 +40,20 @@ export class VoteEffect {
       ofType(deleteVote),
       switchMap((action) => {
         this.voteService.deleteVote(action.vote);
+        const votesLoaded = this.voteService.getVotes();
+        return of({ type: VotesActionTypes.LOAD_VOTES, votes: votesLoaded });
+      }),
+      catchError((error) =>
+        of({ type: VotesActionTypes.ERROR_VOTE, error: error })
+      )
+    )
+  );
+
+  editVote$ = createEffect(() =>
+    this.$actions.pipe(
+      ofType(editVote),
+      switchMap((action) => {
+        this.voteService.editVote(action.vote);
         const votesLoaded = this.voteService.getVotes();
         return of({ type: VotesActionTypes.LOAD_VOTES, votes: votesLoaded });
       }),
