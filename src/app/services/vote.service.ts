@@ -43,12 +43,8 @@ export class VoteService {
 
   editVote(deleteVote) {
     const votes = JSON.parse(window.localStorage.getItem("votes"));
-    console.log(votes);
-    console.log(deleteVote);
-    console.log("voteid", deleteVote.id);
-    const saved = votes.filter((vote) => {
-      return vote.id !== deleteVote.id;
-    });
-    window.localStorage.setItem("votes", JSON.stringify(saved));
+    const zzz = votes.findIndex((vote) => vote.id === deleteVote.id);
+    votes[zzz].title = deleteVote.title;
+    window.localStorage.setItem("votes", JSON.stringify(votes));
   }
 }

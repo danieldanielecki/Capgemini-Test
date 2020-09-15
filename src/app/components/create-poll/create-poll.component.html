@@ -7,21 +7,22 @@
     formControlName="title"
     placeholder="Add your vote"
     required
+    [(ngModel)]="todo"
   />
-  <button
-    *ngIf="votes$ | async as votes"
-    [disabled]="votes.length >= 10"
-    type="submit"
-  >
-    Add Vote
-  </button>
+  <div *ngIf="votes$ | async as votes">
+    <button *ngIf="!editing" [disabled]="votes.length >= 10" type="submit">
+      Add Vote
+    </button>
+    <button (click)="editVote(todo)" *ngIf="editing">Update</button>
+    <button (click)="cancelEdit()" *ngIf="editing">Cancel</button>
+  </div>
 </form>
 
 <section *ngIf="votes$ | async as votes">
   <ul *ngFor="let vote of votes">
     <li>
       <button (click)="deleteVote(vote)">X</button>
-      <button (click)="editVote(vote)">edit</button>
+      <button (click)="editToDo(vote)">edit</button>
       <span>{{ vote.title }}</span>
     </li>
     <ol *ngIf="votes.length > 0">

@@ -25,6 +25,9 @@ export class CreatePollComponent implements OnInit {
   public barChartType: ChartType = "bar";
   public barChartLegend: boolean = true;
   public barChartLabels: Label[] = [""];
+  public editing: boolean = false;
+  public idToEdit: number | null = null;
+  public todo: string = "";
 
   public barChartData: any = [
     { data: [0], label: "" },
@@ -69,6 +72,7 @@ export class CreatePollComponent implements OnInit {
       addVote({ title: this.votesForm.controls.title.value })
     );
     this.votesForm.controls.title.reset();
+    this.todo = "";
   }
 
   public deleteVote(deletedVote: Vote): void {
@@ -77,10 +81,26 @@ export class CreatePollComponent implements OnInit {
     this.store.dispatch(deleteVote({ vote: deletedVote }));
   }
 
-  public editVote(vote2: Vote): void {
-    const index = this.barChartLabels.indexOf(vote2.title);
-    this.barChartLabels.splice(index, 1);
-    this.store.dispatch(editVote({ vote: vote2 }));
+  public editToDo(todo: Vote): void {
+    this.editing = true;
+    this.todo = todo.title;
+    this.idToEdit = todo.id;
+  }
+
+  public cancelEdit(): void {
+    this.editing = false;
+    this.todo = "";
+    this.votesForm.controls.title.reset();
+  }
+
+  public editVote(vote2: string): void {
+    // const index = this.barChartLabels.indexOf(vote2.title);
+    // console.log("EDIT", index);
+    // this.barChartLabels.splice(index, 1);
+    const objectMe: Vote = { id: this.idToEdit, title: vote2 };
+    this.store.dispatch(editVote({ vote: objectMe }));
+    this.editing = false;
+    this.todo = "";
   }
 
   public onVote(vote2: Vote) {
