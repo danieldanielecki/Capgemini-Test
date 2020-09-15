@@ -30,16 +30,16 @@ export class CreatePollComponent implements OnInit {
   public todo: string = "";
 
   public barChartData: any = [
-    { data: [0], label: "" },
-    { data: [0], label: "" },
-    { data: [0], label: "" },
-    { data: [0], label: "" },
-    { data: [0], label: "" },
-    { data: [0], label: "" },
-    { data: [0], label: "" },
-    { data: [0], label: "" },
-    { data: [0], label: "" },
-    { data: [0], label: "" },
+    { data: [], label: "" },
+    { data: [], label: "" },
+    { data: [], label: "" },
+    { data: [], label: "" },
+    { data: [], label: "" },
+    { data: [], label: "" },
+    { data: [], label: "" },
+    { data: [], label: "" },
+    { data: [], label: "" },
+    { data: [], label: "" },
   ];
   public error$: Observable<any>;
   public votes$: Observable<any>;
@@ -60,6 +60,7 @@ export class CreatePollComponent implements OnInit {
         //   this.barChartData = [{ data: [2, 3, 4], label: "Sessions" }];
         // }
         // console.log(item);
+        this.newDataPoint([vote.id - 1], vote.title);
         this.barChartData[vote.id - 1].label = vote.title;
         console.log(vote);
       });
