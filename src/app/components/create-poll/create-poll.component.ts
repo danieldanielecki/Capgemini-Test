@@ -99,6 +99,16 @@ export class CreatePollComponent implements OnInit {
     // this.barChartLabels.splice(index, 1);
     const objectMe: Vote = { id: this.idToEdit, title: vote2 };
     this.store.dispatch(editVote({ vote: objectMe }));
+    this.store.pipe(select(selectVotes)).subscribe((votes) => {
+      votes.map((vote) => {
+        // if (item === null) {
+        //   this.barChartData = [{ data: [2, 3, 4], label: "Sessions" }];
+        // }
+        // console.log(item);
+        this.barChartData[this.idToEdit - 1].label = vote2;
+      });
+    });
+    this.newDataPoint([this.idToEdit - 1], vote2);
     this.editing = false;
     this.todo = "";
   }
