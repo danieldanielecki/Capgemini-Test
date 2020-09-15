@@ -30,16 +30,16 @@ export class CreatePollComponent implements OnInit {
   public todo: string = "";
 
   public barChartData: any = [
-    { data: [], label: "" },
-    { data: [], label: "" },
-    { data: [], label: "" },
-    { data: [], label: "" },
-    { data: [], label: "" },
-    { data: [], label: "" },
-    { data: [], label: "" },
-    { data: [], label: "" },
-    { data: [], label: "" },
-    { data: [], label: "" },
+    { data: [0], label: "" },
+    { data: [0], label: "" },
+    { data: [0], label: "" },
+    { data: [0], label: "" },
+    { data: [0], label: "" },
+    { data: [0], label: "" },
+    { data: [0], label: "" },
+    { data: [0], label: "" },
+    { data: [0], label: "" },
+    { data: [0], label: "" },
   ];
   public error$: Observable<any>;
   public votes$: Observable<any>;
