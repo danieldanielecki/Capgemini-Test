@@ -1,4 +1,4 @@
 export class Vote {
-  id: number;
+  index: number;
   title: string;
 }

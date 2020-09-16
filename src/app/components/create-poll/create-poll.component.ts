@@ -8,7 +8,7 @@ import { ChartDataSets, ChartOptions, ChartType } from "chart.js";
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import { Label } from "ng2-charts";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { select, Store } from "@ngrx/store";
 import { selectErrors, selectVotes } from "./../../store/vote.reducers";
 import { Vote } from "./../../models/vote.model";
@@ -24,23 +24,13 @@ export class CreatePollComponent implements OnInit {
   };
   public barChartType: ChartType = "bar";
   public barChartLegend: boolean = true;
-  public barChartLabels: Label[] = [""];
+  public barChartLabels: Label[] = ["Results"];
   public editing: boolean = false;
   public idToEdit: number | null = null;
-  public todo: string = "";
+  public inputFieldValue: string = "";
 
-  public barChartData: any = [
-    { data: [0], label: "" },
-    { data: [0], label: "" },
-    { data: [0], label: "" },
-    { data: [0], label: "" },
-    { data: [0], label: "" },
-    { data: [0], label: "" },
-    { data: [0], label: "" },
-    { data: [0], label: "" },
-    { data: [0], label: "" },
-    { data: [0], label: "" },
-  ];
+  // public barChartData: any = [{ data: [], label: "No Data" }];
+  public barChartData: any = [];
   public error$: Observable<any>;
   public votes$: Observable<any>;
   public votesForm: FormGroup = new FormGroup({
@@ -54,83 +44,61 @@ export class CreatePollComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.store.pipe(select(selectVotes)).subscribe((votes) => {
-      votes.map((vote) => {
-        // if (item === null) {
-        //   this.barChartData = [{ data: [2, 3, 4], label: "Sessions" }];
-        // }
-        // console.log(item);
-        this.newDataPoint([vote.id - 1], vote.title);
-        this.barChartData[vote.id - 1].label = vote.title;
-        console.log(vote);
+    const someData: Subscription = this.store
+      .pipe(select(selectVotes))
+      .subscribe((votes) => {
+        votes.map((vote) => {
+          // TODO: What about when the store is empty?
+          this.barChartData.push({ data: [0], label: vote.title });
+          this.barChartData[vote.index].data = [0];
+        });
       });
-    });
+    someData.unsubscribe();
   }
 
   public onSubmit(): void {
-    this.newDataPoint([0], this.votesForm.controls.title.value);
+    // if (this.barChartData[0].label == "No Data") {
+    //   this.barChartData.shift();
+    // }
+    this.barChartData.push({
+      data: [0],
+      label: this.votesForm.controls.title.value,
+    });
     this.store.dispatch(
       addVote({ title: this.votesForm.controls.title.value })
     );
     this.votesForm.controls.title.reset();
-    this.todo = "";
+    this.inputFieldValue = "";
   }
 
   public deleteVote(deletedVote: Vote): void {
-    const index = this.barChartLabels.indexOf(deletedVote.title);
-    this.barChartLabels.splice(index, 1);
+    this.barChartData.splice(deletedVote.index, 1);
     this.store.dispatch(deleteVote({ vote: deletedVote }));
   }
 
-  public editToDo(todo: Vote): void {
+  public editToDo(vote: Vote): void {
     this.editing = true;
-    this.todo = todo.title;
-    this.idToEdit = todo.id;
+    this.inputFieldValue = vote.title;
+    this.idToEdit = vote.index;
   }
 
   public cancelEdit(): void {
     this.editing = false;
-    this.todo = "";
+    this.inputFieldValue = "";
     this.votesForm.controls.title.reset();
   }
 
   public editVote(vote2: string): void {
-    // const index = this.barChartLabels.indexOf(vote2.title);
-    // console.log("EDIT", index);
-    // this.barChartLabels.splice(index, 1);
-    const objectMe: Vote = { id: this.idToEdit, title: vote2 };
+    const objectMe: Vote = { index: this.idToEdit, title: vote2 };
     this.store.dispatch(editVote({ vote: objectMe }));
-    this.store.pipe(select(selectVotes)).subscribe((votes) => {
-      votes.map((vote) => {
-        // if (item === null) {
-        //   this.barChartData = [{ data: [2, 3, 4], label: "Sessions" }];
-        // }
-        // console.log(item);
-        this.barChartData[this.idToEdit - 1].label = vote2;
-      });
-    });
-    this.newDataPoint([this.idToEdit - 1], vote2);
+    this.barChartData[this.idToEdit].label = vote2;
+    this.inputFieldValue = "";
     this.editing = false;
-    this.todo = "";
   }
 
   public onVote(vote2: Vote) {
-    const index = this.barChartLabels.indexOf(vote2.title);
-    this.barChartData[index] = Object.assign({}, this.barChartData[index], {
-      data: [
-        ...this.barChartData[index].data,
-        +this.barChartData[0].data[index]++,
-      ],
-    });
-  }
-
-  public newDataPoint(dataArr = [0], label) {
-    this.barChartData.forEach((dataset, index) => {
-      this.barChartData[index] = Object.assign({}, this.barChartData[index], {
-        data: [...this.barChartData[index].data, dataArr[index]],
-      });
-    });
-
-    this.barChartLabels = [...this.barChartLabels, label];
+    this.barChartData[vote2.index].data = [
+      +this.barChartData[vote2.index].data + 1,
+    ];
   }
 }

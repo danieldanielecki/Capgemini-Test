@@ -7,13 +7,13 @@
     formControlName="title"
     placeholder="Add your vote"
     required
-    [(ngModel)]="todo"
+    [(ngModel)]="inputFieldValue"
   />
   <div *ngIf="votes$ | async as votes">
     <button *ngIf="!editing" [disabled]="votes.length >= 10" type="submit">
       Add Vote
     </button>
-    <button (click)="editVote(todo)" *ngIf="editing">Update</button>
+    <button (click)="editVote(inputFieldValue)" *ngIf="editing">Update</button>
     <button (click)="cancelEdit()" *ngIf="editing">Cancel</button>
   </div>
 </form>
