@@ -2,6 +2,7 @@ import { AppComponent } from "./app.component";
 import { BrowserModule } from "@angular/platform-browser";
 import { ChartsModule } from "ng2-charts";
 import { CreatePollComponent } from "./components/create-poll/create-poll.component";
+import { DisplayPollResultsComponent } from "./components/display-poll-results/display-poll-results.component";
 import { EffectsModule } from "@ngrx/effects";
 import { environment } from "../environments/environment";
 import { NgModule } from "@angular/core";
@@ -9,10 +10,17 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { StoreModule } from "@ngrx/store";
 import { VoteEffect } from "./store/vote.effects";
+import { VotePollComponent } from "./components/vote-poll/vote-poll.component";
 import { VoteReducer } from "src/app/store/vote.reducers";
+import { DataService } from "./services/data.service";
 
 @NgModule({
-  declarations: [AppComponent, CreatePollComponent],
+  declarations: [
+    AppComponent,
+    CreatePollComponent,
+    DisplayPollResultsComponent,
+    VotePollComponent,
+  ],
   imports: [
     BrowserModule.withServerTransition({ appId: "serverApp" }),
     ChartsModule,
@@ -27,7 +35,7 @@ import { VoteReducer } from "src/app/store/vote.reducers";
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

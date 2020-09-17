@@ -4,5 +4,6 @@ export enum VotesActionTypes {
   EDIT_VOTE = "EDIT_VOTE",
   ERROR_VOTE = "ERROR_VOTE",
   GET_VOTES = "GET_VOTES",
+  INCREMENT_VOTE = "INCREMENT_VOTE",
   LOAD_VOTES = "LOAD_VOTES",
 }

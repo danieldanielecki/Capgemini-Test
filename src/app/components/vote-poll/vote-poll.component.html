@@ -1,0 +1,13 @@
+<ng-container *ngFor="let vote of messageeee">
+  <input
+    type="text"
+    [(ngModel)]="vote.title"
+    (ngModelChange)="onChange(vote)"
+  />
+  <label for="{{ vote.title }}">{{ vote.title }}</label>
+  <button (click)="deleteVote(vote)">X</button>
+  <ul>
+    <li (click)="onVote(vote)">{{ vote.title }}</li>
+  </ul>
+</ng-container>
+<app-display-poll-results></app-display-poll-results>
