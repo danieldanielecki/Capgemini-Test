@@ -28,6 +28,7 @@ export class CreatePollComponent implements OnInit {
   public editing: boolean = false;
   public idToEdit: number | null = null;
   public inputFieldValue: string = "";
+  public question: string = "";
 
   // public barChartData: any = [{ data: [], label: "No Data" }];
   public barChartData: any = [];

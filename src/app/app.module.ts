@@ -5,7 +5,7 @@ import { CreatePollComponent } from "./components/create-poll/create-poll.compon
 import { EffectsModule } from "@ngrx/effects";
 import { environment } from "../environments/environment";
 import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { StoreModule } from "@ngrx/store";
 import { VoteEffect } from "./store/vote.effects";
@@ -17,6 +17,7 @@ import { VoteReducer } from "src/app/store/vote.reducers";
     BrowserModule.withServerTransition({ appId: "serverApp" }),
     ChartsModule,
     EffectsModule.forRoot([VoteEffect]),
+    FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({ Vote: VoteReducer }),
     // Must be placed after StoreModule to be detectable by Redux Chrome DevTools.

@@ -1,6 +1,10 @@
 <section *ngIf="error$ | async as error">
   <h1>{{ error }}</h1>
 </section>
+<section>
+  <input [(ngModel)]="question" />
+  <h2>{{ question }}</h2>
+</section>
 <form [formGroup]="votesForm" (ngSubmit)="onSubmit()">
   <input
     type="text"
