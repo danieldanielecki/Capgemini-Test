@@ -15,7 +15,7 @@ import { Vote } from "./../../models/vote.model";
 })
 export class DisplayPollResultsComponent implements OnInit {
   public barChartData: any = [];
-  public barChartLabels: Label[] = ["Results2"];
+  public barChartLabels: Label[] = ["Results"];
   public barChartLegend: boolean = true;
   public barChartOptions: ChartOptions = {
     responsive: true,

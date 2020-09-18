@@ -1,31 +1,50 @@
 <!-- <section *ngIf="error$ | async as error">
   <h1>{{ error }}</h1>
 </section> -->
-<section style="margin-top: 200px">
-  <mat-form-field>
-    <input matInput [(ngModel)]="question" />
-  </mat-form-field>
-  <h2>{{ question }}</h2>
-</section>
-
-<section *ngIf="votes$ | async as votes">
-  <form [formGroup]="votesForm" (ngSubmit)="onSubmit()">
-    <mat-form-field>
-      <input
-        matInput
-        formControlName="title"
-        type="text"
-        placeholder="Add your vote"
-      />
-    </mat-form-field>
-    <button mat-raised-button [disabled]="votes.length >= 10" type="submit">
-      Add Vote
-    </button>
-  </form>
-
-  <br />
-  <app-vote-poll></app-vote-poll>
-  <ng-container *ngIf="votes.length > 1">
-    <app-display-poll-results></app-display-poll-results>
-  </ng-container>
-</section>
+<mat-card class="mat-elevation-z24">
+  <mat-card-title>{{ question }}</mat-card-title>
+  <mat-card-content>
+    <section fxFlex="100">
+      <mat-form-field>
+        <input matInput [(ngModel)]="question" />
+      </mat-form-field>
+    </section>
+  </mat-card-content>
+</mat-card>
+<hr />
+<mat-card class="mat-elevation-z24">
+  <mat-card-content>
+    <section *ngIf="votes$ | async as votes">
+      <mat-card class="mat-elevation-z24" fxFlex="15" fxFlexOffset="1">
+        <form [formGroup]="votesForm" (ngSubmit)="onSubmit()">
+          <mat-form-field>
+            <input
+              matInput
+              formControlName="title"
+              type="text"
+              placeholder="Add your vote"
+            />
+          </mat-form-field>
+          <button
+            mat-raised-button
+            [disabled]="votes.length >= 25"
+            type="submit"
+          >
+            Add Vote
+          </button>
+        </form>
+      </mat-card>
+      <br />
+      <mat-card class="mat-elevation-z24" fxFlex="25" fxFlexOffset="2"
+        ><app-vote-poll></app-vote-poll
+      ></mat-card>
+      <mat-card class="mat-elevation-z24" fxFlex="55" fxFlexOffset="2">
+        <ng-container *ngIf="votes.length > 1">
+          <mat-card-content>
+            <app-display-poll-results></app-display-poll-results>
+          </mat-card-content>
+        </ng-container>
+      </mat-card>
+    </section>
+  </mat-card-content>
+</mat-card>
