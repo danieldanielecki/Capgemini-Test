@@ -4,6 +4,7 @@
       title="{{ vote.title }}"
       value="{{ vote.title }}"
       (click)="onVote(vote)"
+      [disabled]="messageeee.length < 2"
       >{{ vote.title }}
     </mat-radio-button>
   </mat-radio-group>
