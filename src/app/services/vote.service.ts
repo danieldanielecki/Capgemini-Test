@@ -41,7 +41,17 @@ export class VoteService {
     const saved = votes.filter((vote) => {
       return vote.index !== deleteVote.index;
     });
-    window.localStorage.setItem("votes", JSON.stringify(saved));
+    let saved2 = [];
+    let index2 = 0;
+    saved.forEach((item) => {
+      saved2.push({
+        index: index2,
+        numberOfVotes: item.numberOfVotes,
+        title: item.title,
+      });
+      index2++;
+    });
+    window.localStorage.setItem("votes", JSON.stringify(saved2));
   }
 
   editVote(deleteVote) {
