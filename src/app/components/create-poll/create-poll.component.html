@@ -1,29 +1,28 @@
 <!-- <section *ngIf="error$ | async as error">
   <h1>{{ error }}</h1>
 </section> -->
-<mat-card class="mat-elevation-z24">
-  <mat-card-title>{{ question }}</mat-card-title>
-  <mat-card-content>
-    <form [formGroup]="questionForm" fxFlex="100">
-      <mat-form-field>
-        <input
-          matInput
-          formControlName="formControlQuestionName"
-          [(ngModel)]="question"
-        />
-        <mat-hint>Add/Edit question.</mat-hint>
-        <mat-error *ngIf="!votesForm.get('formControlVoteName').valid"
-          >Question must be <strong>between 1 and 30 characters.</strong>
-        </mat-error>
-      </mat-form-field>
-    </form>
-  </mat-card-content>
+<mat-card class="mat-elevation-z24" style="height: 5rem">
+  <mat-card-title>Sir Vote-a-lot</mat-card-title>
 </mat-card>
 <hr />
 <mat-card class="mat-elevation-z24" style="margin-bottom: 100px">
   <mat-card-content>
     <section>
-      <mat-card class="mat-elevation-z24" fxFlex="40" fxFlexOffset="1">
+      <mat-card class="mat-elevation-z24" fxFlex="30" fxFlexOffset="1">
+        <mat-card-title>{{ question }}</mat-card-title>
+        <form [formGroup]="questionForm" style="margin-bottom: 1rem">
+          <mat-form-field>
+            <input
+              matInput
+              formControlName="formControlQuestionName"
+              [(ngModel)]="question"
+            />
+            <mat-hint>Add/Edit question.</mat-hint>
+            <mat-error *ngIf="!votesForm.get('formControlVoteName').valid"
+              >Question must be <strong>between 1 and 30 characters.</strong>
+            </mat-error>
+          </mat-form-field>
+        </form>
         <ng-container *ngFor="let vote of messageeee">
           <mat-form-field>
             <input
@@ -42,7 +41,6 @@
             </mat-error>
           </mat-form-field>
           <button mat-raised-button (click)="deleteVote(vote)">X</button>
-          <!-- </form> -->
         </ng-container>
         <form
           [formGroup]="votesForm"
@@ -80,10 +78,12 @@
         </button>
       </mat-card>
       <br />
-      <mat-card class="mat-elevation-z24" fxFlex="15" fxFlexOffset="2"
-        ><app-vote-poll></app-vote-poll
+      <mat-card class="mat-elevation-z24" fxFlex="25" fxFlexOffset="2">
+        <mat-card-title>{{ question }}</mat-card-title>
+        <app-vote-poll></app-vote-poll
       ></mat-card>
       <mat-card class="mat-elevation-z24" fxFlex="40" fxFlexOffset="2">
+        <mat-card-title>{{ question }}</mat-card-title>
         <ng-container *ngIf="messageeee.length > 1">
           <mat-card-content>
             <app-display-poll-results></app-display-poll-results>
