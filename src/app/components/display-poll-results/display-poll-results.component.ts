@@ -19,6 +19,15 @@ export class DisplayPollResultsComponent implements OnInit {
   public barChartLegend: boolean = true;
   public barChartOptions: ChartOptions = {
     responsive: true,
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+    },
   };
   public barChartType: ChartType = "bar";
   public error$: Observable<any>;
