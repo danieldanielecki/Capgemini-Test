@@ -9,7 +9,9 @@
   <mat-card-content>
     <section>
       <mat-card class="mat-elevation-z24" fxFlex="30" fxFlexOffset="1">
-        <mat-card-title>{{ question }}</mat-card-title>
+        <mat-card-title style="border: 1px solid black; padding: 0.5rem">{{
+          question
+        }}</mat-card-title>
         <form [formGroup]="questionForm" style="margin-bottom: 1rem">
           <mat-form-field>
             <input
