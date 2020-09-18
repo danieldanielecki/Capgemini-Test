@@ -2,14 +2,25 @@
   <h1>{{ error }}</h1>
 </section> -->
 <section style="margin-top: 200px">
-  <input [(ngModel)]="question" />
+  <mat-form-field>
+    <input matInput [(ngModel)]="question" />
+  </mat-form-field>
   <h2>{{ question }}</h2>
 </section>
 
 <section *ngIf="votes$ | async as votes">
   <form [formGroup]="votesForm" (ngSubmit)="onSubmit()">
-    <input formControlName="title" type="text" placeholder="Add your vote" />
-    <button [disabled]="votes.length >= 10" type="submit">Add Vote</button>
+    <mat-form-field>
+      <input
+        matInput
+        formControlName="title"
+        type="text"
+        placeholder="Add your vote"
+      />
+    </mat-form-field>
+    <button mat-raised-button [disabled]="votes.length >= 10" type="submit">
+      Add Vote
+    </button>
   </form>
 
   <br />

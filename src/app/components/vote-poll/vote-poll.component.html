@@ -1,8 +1,21 @@
 <ng-container *ngFor="let vote of messageeee">
-  <input type="text" [(ngModel)]="vote.title" (change)="onChange(vote)" />
+  <mat-form-field>
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="vote.title"
+      (change)="onChange(vote)"
+    />
+  </mat-form-field>
   <label for="{{ vote.title }}">{{ vote.title }}</label>
-  <button (click)="deleteVote(vote)">X</button>
-  <ul>
-    <li (click)="onVote(vote)">{{ vote.title }}</li>
-  </ul>
+  <button mat-raised-button (click)="deleteVote(vote)">X</button>
+  <mat-radio-group color="primary">
+    <mat-radio-button
+      title="{{ vote.title }}"
+      value="{{ vote.title }}"
+      (click)="onVote(vote)"
+      >{{ vote.title }}
+    </mat-radio-button>
+  </mat-radio-group>
+  <br />
 </ng-container>
