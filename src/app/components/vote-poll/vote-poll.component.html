@@ -1,11 +1,10 @@
 <ng-container *ngFor="let vote of messageeee">
-  <mat-radio-group color="primary">
-    <mat-radio-button
-      title="{{ vote.title }}"
-      value="{{ vote.title }}"
-      (click)="onVote(vote)"
-      >{{ vote.title }}
-    </mat-radio-button>
-  </mat-radio-group>
+  <mat-radio-button
+    title="{{ vote.title }}"
+    value="{{ vote.title }}"
+    (click)="onVote(vote)"
+    color="primary"
+    >{{ vote.title }}
+  </mat-radio-button>
   <br />
 </ng-container>
