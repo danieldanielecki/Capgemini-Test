@@ -47,3 +47,13 @@ The application is a single page application which is divided in three sections.
 - Basic RWD has been done using `Angular Flex-Layout`, however had to use previous version based on [#1200 (comment)](https://github.com/angular/flex-layout/issues/1200#issuecomment-604898951)
 - `SharedModule` has been implemented for the basic case, it has a separated `MaterialModule` inside which consists all used `Angular Material` modules
 - Given the fact that my time was limited, for a bonus decided to work on UI/UX a bit, instead of performing unit/E2E tests
+
+### How to run this locally?
+
+The same steps, as for every Angular application:
+
+1. Clone the repository
+2. Run `npm install` (`Node.js` and therefore `npm` must be installed)
+3. Run `ng serve` (`Angular CLI` must be installed)
+4. As long as port `4200` is free on your device, then it'll be launched on `localhost:4200`
+5. For SSR: first `npm run build:ssr` then `npm run server:ssr`, as long as port `4000` is free on your device, then it'll be launched on `localhost:4000`. Check page source to see the SSR.
