@@ -1,6 +1,3 @@
-<!-- <section *ngIf="error$ | async as error">
-  <h1>{{ error }}</h1>
-</section> -->
 <mat-card class="mat-elevation-z24" style="height: 5rem">
   <mat-card-title>Sir Vote-a-lot</mat-card-title>
 </mat-card>
@@ -21,9 +18,9 @@
         <form [formGroup]="questionForm" style="margin-bottom: 1rem">
           <mat-form-field>
             <input
-              matInput
-              formControlName="formControlQuestionName"
               [(ngModel)]="question"
+              formControlName="formControlQuestionName"
+              matInput
             />
             <mat-hint>Add/Edit question.</mat-hint>
             <mat-error *ngIf="!votesForm.get('formControlVoteName').valid"
@@ -31,18 +28,18 @@
             </mat-error>
           </mat-form-field>
         </form>
-        <ng-container *ngFor="let vote of messageeee">
+        <ng-container *ngFor="let vote of votesArray">
           <div style="display: block">
             <mat-form-field style="width: 50%">
               <input
                 #voteDirective="ngModel"
-                matInput
-                type="text"
                 [(ngModel)]="vote.title"
                 (change)="onChange(vote)"
+                matInput
                 minlength="1"
                 maxlength="80"
                 required
+                type="text"
               />
               <mat-hint>Edit vote name.</mat-hint>
               <mat-error [hidden]="voteDirective.valid"
@@ -50,8 +47,8 @@
               </mat-error>
             </mat-form-field>
             <button
-              mat-raised-button
               (click)="deleteVote(vote)"
+              mat-raised-button
               style="float: right"
             >
               X
@@ -59,17 +56,17 @@
           </div>
         </ng-container>
         <form
+          #formDirective="ngForm"
           [formGroup]="votesForm"
           (ngSubmit)="onSubmit(formDirective)"
-          #formDirective="ngForm"
           style="margin: 1rem 0 2rem"
         >
           <mat-form-field>
             <input
               matInput
               formControlName="formControlVoteName"
-              type="text"
               placeholder="Type an answer"
+              type="text"
             />
             <mat-hint>Add vote to the poll.</mat-hint>
             <mat-error *ngIf="!votesForm.get('formControlVoteName').valid"
@@ -77,17 +74,17 @@
             </mat-error>
           </mat-form-field>
           <button
-            mat-raised-button
             [disabled]="
-              messageeee.length >= maxNumberOfAnswers || !votesForm.valid
+              votesArray.length >= maxNumberOfAnswers || !votesForm.valid
             "
+            mat-raised-button
             type="submit"
           >
             Add
           </button>
         </form>
         <p style="display: inline-block">
-          {{ messageeee.length }} / {{ maxNumberOfAnswers }} possible answers
+          {{ votesArray.length }} / {{ maxNumberOfAnswers }} possible answers
         </p>
         <button mat-raised-button type="submit" (click)="onReset()">
           Reset
@@ -112,7 +109,7 @@
         fxFlexOffset.lt-md="5"
       >
         <mat-card-title>{{ question }}</mat-card-title>
-        <ng-container *ngIf="messageeee.length > 1">
+        <ng-container *ngIf="votesArray.length > 1">
           <mat-card-content>
             <app-display-poll-results></app-display-poll-results>
           </mat-card-content>

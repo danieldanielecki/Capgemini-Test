@@ -5,7 +5,7 @@ import { DataService } from "./../../services/data.service";
 import { Label } from "ng2-charts";
 import { Observable } from "rxjs/internal/Observable";
 import { select, Store } from "@ngrx/store";
-import { selectErrors, selectVotes } from "./../../store/vote.reducers";
+import { selectVotes } from "./../../store/vote.reducers";
 import { Vote } from "./../../models/vote.model";
 
 @Component({
@@ -30,7 +30,6 @@ export class DisplayPollResultsComponent implements OnInit {
     },
   };
   public barChartType: ChartType = "bar";
-  public error$: Observable<any>;
   public sumOfVotes: number = 0;
   public votes$: Observable<any>;
 
@@ -40,7 +39,6 @@ export class DisplayPollResultsComponent implements OnInit {
   ) {
     this.store.dispatch(getVotes());
     this.votes$ = this.store.pipe(select(selectVotes));
-    this.error$ = this.store.pipe(select(selectErrors));
   }
 
   public ngOnInit(): void {
@@ -53,8 +51,8 @@ export class DisplayPollResultsComponent implements OnInit {
           label: vote.title,
         };
       });
-      this.barChartData.forEach((data) => {
-        this.sumOfVotes += data.data[0];
+      this.barChartData.forEach((dataElement) => {
+        this.sumOfVotes += dataElement.data[0];
       });
       this.data.sendVotes(votes);
     });

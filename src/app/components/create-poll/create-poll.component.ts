@@ -20,7 +20,7 @@ import {
 } from "@angular/forms";
 import { Observable } from "rxjs";
 import { select, Store } from "@ngrx/store";
-import { selectErrors, selectVotes } from "./../../store/vote.reducers";
+import { selectVotes } from "./../../store/vote.reducers";
 import { Vote } from "./../../models/vote.model";
 
 @Component({
@@ -34,7 +34,7 @@ export class CreatePollComponent implements AfterViewInit {
   public maxNumberOfAnswers: number = 10;
   public question: string = "";
   public votes$: Observable<any>;
-  messageeee: any = [];
+  public votesArray: Vote[] = [];
   public votesForm: FormGroup = this.formBuilder.group({
     formControlVoteName: [
       "",
@@ -64,21 +64,20 @@ export class CreatePollComponent implements AfterViewInit {
   ) {
     this.store.dispatch(getVotes());
     this.votes$ = this.store.pipe(select(selectVotes));
-    // this.error$ = this.store.pipe(select(selectErrors));
   }
 
   public ngOnInit(): void {
     this.store.pipe(select(selectVotes)).subscribe((votes) => {
       votes.map((vote) => {
-        this.messageeee.splice(vote.index, 1);
-        this.messageeee[vote.index] = {
+        this.votesArray.splice(vote.index, 1);
+        this.votesArray[vote.index] = {
           index: vote.index,
           numberOfVotes: vote.numberOfVotes,
           title: vote.title,
         };
       });
       if (votes.length === 0) {
-        this.messageeee = [];
+        this.votesArray = [];
       }
       this.dataService.sendVotes(votes);
     });

@@ -1,11 +1,11 @@
 <div>
   <canvas
     baseChart
+    [chartType]="barChartType"
     [datasets]="barChartData"
     [labels]="barChartLabels"
-    [options]="barChartOptions"
     [legend]="barChartLegend"
-    [chartType]="barChartType"
+    [options]="barChartOptions"
   >
   </canvas>
   <p>Total votes: {{ sumOfVotes }}</p>

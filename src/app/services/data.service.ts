@@ -7,8 +7,6 @@ export class DataService {
   private messageSource = new BehaviorSubject([]);
   currentMessage = this.messageSource.asObservable();
 
-  constructor() {}
-
   sendVotes(votes: Vote[]) {
     this.messageSource.next(votes);
   }

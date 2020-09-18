@@ -1,9 +1,9 @@
-<ng-container *ngFor="let vote of messageeee">
+<ng-container *ngFor="let vote of votesArray">
   <mat-radio-button
-    title="{{ vote.title }}"
-    value="{{ vote.title }}"
     (click)="onVote(vote)"
     color="primary"
+    title="{{ vote.title }}"
+    value="{{ vote.title }}"
     >{{ vote.title }}
   </mat-radio-button>
   <br />

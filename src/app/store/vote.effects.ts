@@ -15,18 +15,7 @@ import { VotesActionTypes } from "./vote.actions.types";
 
 @Injectable()
 export class VoteEffect {
-  loadVotes$ = createEffect(() =>
-    this.$actions.pipe(
-      ofType(getVotes),
-      switchMap((action) => {
-        const votesLoaded = this.voteService.getVotes();
-        return of({ type: VotesActionTypes.LOAD_VOTES, votes: votesLoaded });
-      }),
-      catchError((error) =>
-        of({ type: VotesActionTypes.ERROR_VOTE, error: error })
-      )
-    )
-  );
+  constructor(private $actions: Actions, private voteService: VoteService) {}
 
   addVote$ = createEffect(() =>
     this.$actions.pipe(
@@ -84,6 +73,19 @@ export class VoteEffect {
     )
   );
 
+  loadVotes$ = createEffect(() =>
+    this.$actions.pipe(
+      ofType(getVotes),
+      switchMap((action) => {
+        const votesLoaded = this.voteService.getVotes();
+        return of({ type: VotesActionTypes.LOAD_VOTES, votes: votesLoaded });
+      }),
+      catchError((error) =>
+        of({ type: VotesActionTypes.ERROR_VOTE, error: error })
+      )
+    )
+  );
+
   resetVotes$ = createEffect(() =>
     this.$actions.pipe(
       ofType(resetVotes),
@@ -97,6 +99,4 @@ export class VoteEffect {
       )
     )
   );
-
-  constructor(private $actions: Actions, private voteService: VoteService) {}
 }

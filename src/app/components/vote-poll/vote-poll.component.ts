@@ -12,10 +12,9 @@ import { Vote } from "./../../models/vote.model";
   styleUrls: ["./vote-poll.component.scss"],
 })
 export class VotePollComponent implements OnInit {
-  messageeee: any = [];
   public barChartData: any = [];
-  public editing: boolean = false;
   public error$: Observable<any>;
+  public votesArray: any = [];
   public votes$: Observable<any>;
 
   constructor(
@@ -30,15 +29,15 @@ export class VotePollComponent implements OnInit {
   public ngOnInit(): void {
     this.store.pipe(select(selectVotes)).subscribe((votes) => {
       votes.map((vote) => {
-        this.messageeee.splice(vote.index, 1);
-        this.messageeee[vote.index] = {
+        this.votesArray.splice(vote.index, 1);
+        this.votesArray[vote.index] = {
           index: vote.index,
           numberOfVotes: vote.numberOfVotes,
           title: vote.title,
         };
       });
       if (votes.length === 0) {
-        this.messageeee = [];
+        this.votesArray = [];
       }
       this.data.sendVotes(votes);
     });
