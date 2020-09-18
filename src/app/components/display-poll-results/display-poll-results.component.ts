@@ -31,6 +31,7 @@ export class DisplayPollResultsComponent implements OnInit {
   };
   public barChartType: ChartType = "bar";
   public error$: Observable<any>;
+  public sumOfVotes: number = 0;
   public votes$: Observable<any>;
 
   constructor(
@@ -44,12 +45,16 @@ export class DisplayPollResultsComponent implements OnInit {
 
   public ngOnInit(): void {
     this.store.pipe(select(selectVotes)).subscribe((votes) => {
+      this.sumOfVotes = 0;
       votes.map((vote) => {
         this.barChartData.splice(vote.index, 1);
         this.barChartData[vote.index] = {
           data: [vote.numberOfVotes],
           label: vote.title,
         };
+      });
+      this.barChartData.forEach((data) => {
+        this.sumOfVotes += data.data[0];
       });
       this.data.sendVotes(votes);
     });
