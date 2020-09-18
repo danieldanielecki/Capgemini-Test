@@ -26,7 +26,6 @@
     <section>
       <mat-card class="mat-elevation-z24" fxFlex="40" fxFlexOffset="1">
         <ng-container *ngFor="let vote of messageeee">
-          <!-- <form [formGroup]="votesForm2"> -->
           <mat-form-field>
             <input
               #voteDirective="ngModel"
@@ -50,6 +49,7 @@
           [formGroup]="votesForm"
           (ngSubmit)="onSubmit(formDirective)"
           #formDirective="ngForm"
+          style="margin: 20px 0 50px"
         >
           <mat-form-field>
             <input
@@ -65,13 +65,18 @@
           </mat-form-field>
           <button
             mat-raised-button
-            [disabled]="messageeee.length >= 10 || !votesForm.valid"
+            [disabled]="
+              messageeee.length >= maxNumberOfAnswers || !votesForm.valid
+            "
             type="submit"
-            style="margin-top: 30px"
           >
             Add
           </button>
         </form>
+        <span
+          >{{ messageeee.length }} / {{ maxNumberOfAnswers }} possible
+          answers</span
+        >
       </mat-card>
       <br />
       <mat-card class="mat-elevation-z24" fxFlex="15" fxFlexOffset="2"

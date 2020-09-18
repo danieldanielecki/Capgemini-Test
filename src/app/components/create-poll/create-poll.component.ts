@@ -31,6 +31,7 @@ import { Vote } from "./../../models/vote.model";
 })
 export class CreatePollComponent implements AfterViewInit {
   public error$: Observable<any>;
+  public maxNumberOfAnswers: number = 10;
   public question: string = "";
   public votes$: Observable<any>;
   messageeee: any = [];
