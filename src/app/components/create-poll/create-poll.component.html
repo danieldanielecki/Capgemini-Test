@@ -5,19 +5,16 @@
   <input [(ngModel)]="question" />
   <h2>{{ question }}</h2>
 </section>
-<form [formGroup]="votesForm" (ngSubmit)="onSubmit()">
-  <input
-    type="text"
-    formControlName="title"
-    placeholder="Add your vote"
-    required
-    [(ngModel)]="inputFieldValue"
-  />
-  <div *ngIf="votes$ | async as votes">
-    <button [disabled]="votes.length >= 10" type="submit">Add Vote</button>
-  </div>
-</form>
 
 <section *ngIf="votes$ | async as votes">
+  <form [formGroup]="votesForm" (ngSubmit)="onSubmit()">
+    <input formControlName="title" type="text" placeholder="Add your vote" />
+    <button [disabled]="votes.length >= 10" type="submit">Add Vote</button>
+  </form>
+
+  <br />
   <app-vote-poll></app-vote-poll>
+  <ng-container *ngIf="votes.length > 1">
+    <app-display-poll-results></app-display-poll-results>
+  </ng-container>
 </section>

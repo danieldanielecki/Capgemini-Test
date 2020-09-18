@@ -35,7 +35,6 @@ export class VotePollComponent implements OnInit {
   public ngOnInit(): void {
     this.store.pipe(select(selectVotes)).subscribe((votes) => {
       votes.map((vote) => {
-        // TODO: What about when the store is empty?
         this.messageeee.splice(vote.index, 1);
         this.messageeee[vote.index] = {
           index: vote.index,
