@@ -1,9 +1,5 @@
 <ng-container *ngFor="let vote of messageeee">
-  <input
-    type="text"
-    [(ngModel)]="vote.title"
-    (ngModelChange)="onChange(vote)"
-  />
+  <input type="text" [(ngModel)]="vote.title" (change)="onChange(vote)" />
   <label for="{{ vote.title }}">{{ vote.title }}</label>
   <button (click)="deleteVote(vote)">X</button>
   <ul>
