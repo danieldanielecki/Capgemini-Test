@@ -1,3 +1,7 @@
+import {
+  ErrorStateMatcher,
+  ShowOnDirtyErrorStateMatcher,
+} from "@angular/material/core";
 import { NgModule } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
@@ -18,5 +22,9 @@ const modules = [
 @NgModule({
   exports: [...modules],
   imports: [...modules],
+  providers: [
+    // Display errors instantly.
+    { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
+  ],
 })
 export class MaterialModule {}

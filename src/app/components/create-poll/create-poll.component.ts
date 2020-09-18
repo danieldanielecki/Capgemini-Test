@@ -12,7 +12,12 @@ import {
   Component,
 } from "@angular/core";
 import { DataService } from "src/app/services/data.service";
-import { FormGroup, FormControl } from "@angular/forms";
+import {
+  FormBuilder,
+  FormGroup,
+  FormGroupDirective,
+  Validators,
+} from "@angular/forms";
 import { Observable } from "rxjs";
 import { select, Store } from "@ngrx/store";
 import { selectErrors, selectVotes } from "./../../store/vote.reducers";
@@ -28,14 +33,32 @@ export class CreatePollComponent implements AfterViewInit {
   public error$: Observable<any>;
   public question: string = "";
   public votes$: Observable<any>;
-  public votesForm: FormGroup = new FormGroup({
-    title: new FormControl(""),
-  });
   messageeee: any = [];
+  public votesForm: FormGroup = this.formBuilder.group({
+    formControlVoteName: [
+      "",
+      Validators.compose([
+        Validators.maxLength(80),
+        Validators.minLength(1),
+        Validators.required,
+      ]),
+    ],
+  });
+  public questionForm: FormGroup = this.formBuilder.group({
+    formControlQuestionName: [
+      "",
+      Validators.compose([
+        Validators.maxLength(80),
+        Validators.minLength(1),
+        Validators.required,
+      ]),
+    ],
+  });
 
   constructor(
     private changeDetection: ChangeDetectorRef,
     private dataService: DataService,
+    private formBuilder: FormBuilder,
     private store: Store<{ Vote: { votes: Vote[] } }>
   ) {
     this.store.dispatch(getVotes());
@@ -60,11 +83,12 @@ export class CreatePollComponent implements AfterViewInit {
     });
   }
 
-  public onSubmit(): void {
+  public onSubmit(formDirective: FormGroupDirective): void {
     this.store.dispatch(
-      addVote({ title: this.votesForm.controls.title.value })
+      addVote({ title: this.votesForm.controls.formControlVoteName.value })
     );
-    this.votesForm.controls.title.reset();
+    this.votesForm.controls.formControlVoteName.reset();
+    formDirective.resetForm(); // Reset validators (workaround to #4190 (https://github.com/angular/components/issues/4190).
   }
 
   public ngAfterViewInit(): void {
@@ -76,7 +100,9 @@ export class CreatePollComponent implements AfterViewInit {
   }
 
   public onChange(voteEdit: Vote) {
-    this.store.dispatch(editVote({ vote: voteEdit }));
+    if (voteEdit.title !== "") {
+      this.store.dispatch(editVote({ vote: voteEdit }));
+    }
   }
 
   public deleteVote(deletedVote: Vote): void {

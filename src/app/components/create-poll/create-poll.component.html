@@ -5,46 +5,73 @@
 <mat-card class="mat-elevation-z24">
   <mat-card-title>{{ question }}</mat-card-title>
   <mat-card-content>
-    <section fxFlex="100">
+    <form [formGroup]="questionForm" fxFlex="100">
       <mat-form-field>
-        <input matInput [(ngModel)]="question" />
+        <input
+          matInput
+          formControlName="formControlQuestionName"
+          [(ngModel)]="question"
+        />
+        <mat-hint>Add/Edit question.</mat-hint>
+        <mat-error *ngIf="!votesForm.get('formControlVoteName').valid"
+          >Question must be <strong>between 1 and 30 characters.</strong>
+        </mat-error>
       </mat-form-field>
-    </section>
+    </form>
   </mat-card-content>
 </mat-card>
 <hr />
-<mat-card class="mat-elevation-z24">
+<mat-card class="mat-elevation-z24" style="margin-bottom: 100px">
   <mat-card-content>
     <section>
       <mat-card class="mat-elevation-z24" fxFlex="40" fxFlexOffset="1">
-        <form [formGroup]="votesForm" (ngSubmit)="onSubmit()">
-          <mat-form-field>
-            <input
-              matInput
-              formControlName="title"
-              type="text"
-              placeholder="Add your vote"
-            />
-          </mat-form-field>
-          <button
-            mat-raised-button
-            [disabled]="messageeee.length >= 10"
-            type="submit"
-          >
-            Add Vote
-          </button>
-        </form>
         <ng-container *ngFor="let vote of messageeee">
+          <!-- <form [formGroup]="votesForm2"> -->
           <mat-form-field>
             <input
+              #voteDirective="ngModel"
               matInput
               type="text"
               [(ngModel)]="vote.title"
               (change)="onChange(vote)"
+              minlength="1"
+              maxlength="80"
+              required
             />
+            <mat-hint>Edit vote name.</mat-hint>
+            <mat-error [hidden]="voteDirective.valid"
+              >Vote must be <strong>between 1 and 30 characters.</strong>
+            </mat-error>
           </mat-form-field>
           <button mat-raised-button (click)="deleteVote(vote)">X</button>
+          <!-- </form> -->
         </ng-container>
+        <form
+          [formGroup]="votesForm"
+          (ngSubmit)="onSubmit(formDirective)"
+          #formDirective="ngForm"
+        >
+          <mat-form-field>
+            <input
+              matInput
+              formControlName="formControlVoteName"
+              type="text"
+              placeholder="Type an answer"
+            />
+            <mat-hint>Add vote to the poll.</mat-hint>
+            <mat-error *ngIf="!votesForm.get('formControlVoteName').valid"
+              >Vote must be <strong>between 1 and 30 characters.</strong>
+            </mat-error>
+          </mat-form-field>
+          <button
+            mat-raised-button
+            [disabled]="messageeee.length >= 10 || !votesForm.valid"
+            type="submit"
+            style="margin-top: 30px"
+          >
+            Add
+          </button>
+        </form>
       </mat-card>
       <br />
       <mat-card class="mat-elevation-z24" fxFlex="15" fxFlexOffset="2"
