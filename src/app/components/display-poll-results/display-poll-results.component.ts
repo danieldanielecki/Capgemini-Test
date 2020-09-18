@@ -37,12 +37,11 @@ export class DisplayPollResultsComponent implements OnInit {
     this.store.pipe(select(selectVotes)).subscribe((votes) => {
       votes.map((vote) => {
         // TODO: What about when the store is empty?
-        // if (this.barChartData[vote.index] === vote) return;
+        this.barChartData.splice(vote.index, 1);
         this.barChartData[vote.index] = {
           data: [vote.numberOfVotes],
           label: vote.title,
         };
-        // this.barChartData.splice(vote.index, 1); // for delete
       });
       this.data.sendVotes(votes);
     });
