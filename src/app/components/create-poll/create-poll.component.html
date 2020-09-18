@@ -1,7 +1,6 @@
 <!-- <section *ngIf="error$ | async as error">
   <h1>{{ error }}</h1>
 </section> -->
-<button mat-raised-button type="submit" (click)="onReset()">Reset</button>
 <mat-card class="mat-elevation-z24">
   <mat-card-title>{{ question }}</mat-card-title>
   <mat-card-content>
@@ -77,6 +76,9 @@
           >{{ messageeee.length }} / {{ maxNumberOfAnswers }} possible
           answers</span
         >
+        <button mat-raised-button type="submit" (click)="onReset()">
+          Reset
+        </button>
       </mat-card>
       <br />
       <mat-card class="mat-elevation-z24" fxFlex="15" fxFlexOffset="2"
