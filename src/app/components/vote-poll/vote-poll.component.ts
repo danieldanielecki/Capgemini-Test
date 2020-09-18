@@ -46,9 +46,8 @@ export class VotePollComponent implements OnInit {
     });
   }
 
-  public onChange(vote: Vote) {
-    const objectMe: Vote = { index: vote.index, title: vote.title };
-    this.store.dispatch(editVote({ vote: objectMe }));
+  public onChange(voteEdit: Vote) {
+    this.store.dispatch(editVote({ vote: voteEdit }));
   }
 
   public deleteVote(deletedVote: Vote): void {
