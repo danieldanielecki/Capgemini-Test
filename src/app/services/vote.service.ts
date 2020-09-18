@@ -1,4 +1,3 @@
-import { DataService } from "./data.service";
 import { Injectable } from "@angular/core";
 import { Vote } from "../models/vote.model";
 
@@ -6,8 +5,6 @@ import { Vote } from "../models/vote.model";
   providedIn: "root",
 })
 export class VoteService {
-  constructor(private dataService: DataService) {}
-
   getVotes() {
     let votes = JSON.parse(window.localStorage.getItem("votes"));
 
@@ -21,7 +18,6 @@ export class VoteService {
     const votesStored = JSON.parse(window.localStorage.getItem("votes"));
     votesStored[vote.index].numberOfVotes += 1;
     window.localStorage.setItem("votes", JSON.stringify(votesStored));
-    this.dataService.sendVotes(votesStored);
   }
 
   addVote(addVote: string) {
@@ -38,8 +34,6 @@ export class VoteService {
     };
     votes.push(vote);
     window.localStorage.setItem("votes", JSON.stringify(votes));
-    this.dataService.sendVotes(votes);
-    this.dataService.sendVote(vote);
   }
 
   deleteVote(deleteVote) {
@@ -48,7 +42,6 @@ export class VoteService {
       return vote.index !== deleteVote.index;
     });
     window.localStorage.setItem("votes", JSON.stringify(saved));
-    this.dataService.sendVotes(saved);
   }
 
   editVote(deleteVote) {
