@@ -47,8 +47,9 @@ The application is a single page application which is divided in three sections.
 - Basic RWD has been done using `Angular Flex-Layout`, however had to use previous version based on [#1200 (comment)](https://github.com/angular/flex-layout/issues/1200#issuecomment-604898951)
 - `SharedModule` has been implemented for the basic case, it has a separated `MaterialModule` inside which consists all used `Angular Material` modules
 - Given the fact that my time was limited, for a bonus decided to work on UI/UX a bit, instead of performing unit/E2E tests
+- The code is relatively clean with following Dump Components, Separation of Concerns (SoC), Single Responsibility Rule (SRP) as well as you might notice that most of the code follows alphabetical order and meaningful names
 
-### How to run this locally?
+### Run this locally
 
 The same steps, as for every Angular application:
 
