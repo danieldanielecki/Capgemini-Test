@@ -5,6 +5,10 @@ import { Vote } from "../models/vote.model";
   providedIn: "root",
 })
 export class VoteService {
+  resetVotes() {
+    window.localStorage.clear();
+  }
+
   getVotes() {
     let votes = JSON.parse(window.localStorage.getItem("votes"));
 

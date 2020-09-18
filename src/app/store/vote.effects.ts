@@ -5,6 +5,7 @@ import {
   editVote,
   getVotes,
   incrementVote,
+  resetVotes,
 } from "./vote.actions";
 import { catchError, switchMap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
@@ -74,6 +75,20 @@ export class VoteEffect {
       ofType(incrementVote),
       switchMap((action) => {
         this.voteService.incrementVote(action.vote);
+        const votesLoaded = this.voteService.getVotes();
+        return of({ type: VotesActionTypes.LOAD_VOTES, votes: votesLoaded });
+      }),
+      catchError((error) =>
+        of({ type: VotesActionTypes.ERROR_VOTE, error: error })
+      )
+    )
+  );
+
+  resetVotes$ = createEffect(() =>
+    this.$actions.pipe(
+      ofType(resetVotes),
+      switchMap((action) => {
+        this.voteService.resetVotes();
         const votesLoaded = this.voteService.getVotes();
         return of({ type: VotesActionTypes.LOAD_VOTES, votes: votesLoaded });
       }),

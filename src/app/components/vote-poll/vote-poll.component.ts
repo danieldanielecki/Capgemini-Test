@@ -1,10 +1,5 @@
-import {
-  deleteVote,
-  editVote,
-  getVotes,
-  incrementVote,
-} from "./../../store/vote.actions";
 import { Component, OnInit } from "@angular/core";
+import { getVotes, incrementVote } from "./../../store/vote.actions";
 import { DataService } from "./../../services/data.service";
 import { Observable } from "rxjs/internal/Observable";
 import { select, Store } from "@ngrx/store";
@@ -42,16 +37,11 @@ export class VotePollComponent implements OnInit {
           title: vote.title,
         };
       });
+      if (votes.length === 0) {
+        this.messageeee = [];
+      }
       this.data.sendVotes(votes);
     });
-  }
-
-  public onChange(voteEdit: Vote) {
-    this.store.dispatch(editVote({ vote: voteEdit }));
-  }
-
-  public deleteVote(deletedVote: Vote): void {
-    this.store.dispatch(deleteVote({ vote: deletedVote }));
   }
 
   public onVote(vote2: Vote) {

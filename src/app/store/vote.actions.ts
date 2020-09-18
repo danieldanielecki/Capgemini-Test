@@ -33,3 +33,5 @@ export const incrementVote = createAction(
   VotesActionTypes.INCREMENT_VOTE,
   props<{ vote: Vote }>()
 );
+
+export const resetVotes = createAction(VotesActionTypes.RESET_VOTES);

@@ -1,6 +1,7 @@
 <!-- <section *ngIf="error$ | async as error">
   <h1>{{ error }}</h1>
 </section> -->
+<button mat-raised-button type="submit" (click)="onReset()">Reset</button>
 <mat-card class="mat-elevation-z24">
   <mat-card-title>{{ question }}</mat-card-title>
   <mat-card-content>
@@ -14,8 +15,8 @@
 <hr />
 <mat-card class="mat-elevation-z24">
   <mat-card-content>
-    <section *ngIf="votes$ | async as votes">
-      <mat-card class="mat-elevation-z24" fxFlex="15" fxFlexOffset="1">
+    <section>
+      <mat-card class="mat-elevation-z24" fxFlex="40" fxFlexOffset="1">
         <form [formGroup]="votesForm" (ngSubmit)="onSubmit()">
           <mat-form-field>
             <input
@@ -27,19 +28,30 @@
           </mat-form-field>
           <button
             mat-raised-button
-            [disabled]="votes.length >= 25"
+            [disabled]="messageeee.length >= 10"
             type="submit"
           >
             Add Vote
           </button>
         </form>
+        <ng-container *ngFor="let vote of messageeee">
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
+              [(ngModel)]="vote.title"
+              (change)="onChange(vote)"
+            />
+          </mat-form-field>
+          <button mat-raised-button (click)="deleteVote(vote)">X</button>
+        </ng-container>
       </mat-card>
       <br />
-      <mat-card class="mat-elevation-z24" fxFlex="25" fxFlexOffset="2"
+      <mat-card class="mat-elevation-z24" fxFlex="15" fxFlexOffset="2"
         ><app-vote-poll></app-vote-poll
       ></mat-card>
-      <mat-card class="mat-elevation-z24" fxFlex="55" fxFlexOffset="2">
-        <ng-container *ngIf="votes.length > 1">
+      <mat-card class="mat-elevation-z24" fxFlex="40" fxFlexOffset="2">
+        <ng-container *ngIf="messageeee.length > 1">
           <mat-card-content>
             <app-display-poll-results></app-display-poll-results>
           </mat-card-content>
