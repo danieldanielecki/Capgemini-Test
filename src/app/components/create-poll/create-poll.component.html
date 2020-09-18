@@ -7,8 +7,14 @@
 <hr />
 <mat-card class="mat-elevation-z24" style="margin-bottom: 5rem">
   <mat-card-content>
-    <section>
-      <mat-card class="mat-elevation-z24" fxFlex="30" fxFlexOffset="1">
+    <section fxLayout.lt-md="column">
+      <mat-card
+        class="mat-elevation-z24"
+        fxFlex="30"
+        fxFlex.lt-md="90"
+        fxFlexOffset="1"
+        fxFlexOffset.lt-md="5"
+      >
         <mat-card-title style="border: 1px solid black; padding: 0.5rem">{{
           question
         }}</mat-card-title>
@@ -26,23 +32,31 @@
           </mat-form-field>
         </form>
         <ng-container *ngFor="let vote of messageeee">
-          <mat-form-field>
-            <input
-              #voteDirective="ngModel"
-              matInput
-              type="text"
-              [(ngModel)]="vote.title"
-              (change)="onChange(vote)"
-              minlength="1"
-              maxlength="80"
-              required
-            />
-            <mat-hint>Edit vote name.</mat-hint>
-            <mat-error [hidden]="voteDirective.valid"
-              >Vote must be <strong>between 1 and 80 characters.</strong>
-            </mat-error>
-          </mat-form-field>
-          <button mat-raised-button (click)="deleteVote(vote)">X</button>
+          <div style="display: block">
+            <mat-form-field style="width: 50%">
+              <input
+                #voteDirective="ngModel"
+                matInput
+                type="text"
+                [(ngModel)]="vote.title"
+                (change)="onChange(vote)"
+                minlength="1"
+                maxlength="80"
+                required
+              />
+              <mat-hint>Edit vote name.</mat-hint>
+              <mat-error [hidden]="voteDirective.valid"
+                >Vote must be <strong>between 1 and 80 characters.</strong>
+              </mat-error>
+            </mat-form-field>
+            <button
+              mat-raised-button
+              (click)="deleteVote(vote)"
+              style="float: right"
+            >
+              X
+            </button>
+          </div>
         </ng-container>
         <form
           [formGroup]="votesForm"
@@ -80,11 +94,23 @@
         </button>
       </mat-card>
       <br />
-      <mat-card class="mat-elevation-z24" fxFlex="25" fxFlexOffset="2">
+      <mat-card
+        class="mat-elevation-z24"
+        fxFlex="25"
+        fxFlex.lt-md="90"
+        fxFlexOffset="2"
+        fxFlexOffset.lt-md="5"
+      >
         <mat-card-title>{{ question }}</mat-card-title>
         <app-vote-poll></app-vote-poll
       ></mat-card>
-      <mat-card class="mat-elevation-z24" fxFlex="40" fxFlexOffset="2">
+      <mat-card
+        class="mat-elevation-z24"
+        fxFlex="40"
+        fxFlex.lt-md="90"
+        fxFlexOffset="2"
+        fxFlexOffset.lt-md="5"
+      >
         <mat-card-title>{{ question }}</mat-card-title>
         <ng-container *ngIf="messageeee.length > 1">
           <mat-card-content>
