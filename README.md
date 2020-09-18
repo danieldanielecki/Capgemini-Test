@@ -46,3 +46,4 @@ The application is a single page application which is divided in three sections.
 - Personally I haven't noticed any bugs, honestly speaking I'm not sure if you'd consider usage of `changeDetection` as a bad practice
 - Basic RWD has been done using `Angular Flex-Layout`, however had to use previous version based on [#1200 (comment)](https://github.com/angular/flex-layout/issues/1200#issuecomment-604898951)
 - `SharedModule` has been implemented for the basic case, it has a separated `MaterialModule` inside which consists all used `Angular Material` modules
+- Given the fact that my time was limited, for a bonus decided to work on UI/UX a bit, instead of performing unit/E2E tests
