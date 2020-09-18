@@ -72,10 +72,9 @@
             Add
           </button>
         </form>
-        <span
-          >{{ messageeee.length }} / {{ maxNumberOfAnswers }} possible
-          answers</span
-        >
+        <p style="display: inline-block">
+          {{ messageeee.length }} / {{ maxNumberOfAnswers }} possible answers
+        </p>
         <button mat-raised-button type="submit" (click)="onReset()">
           Reset
         </button>
