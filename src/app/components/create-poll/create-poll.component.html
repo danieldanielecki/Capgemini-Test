@@ -19,7 +19,7 @@
             />
             <mat-hint>Add/Edit question.</mat-hint>
             <mat-error *ngIf="!votesForm.get('formControlVoteName').valid"
-              >Question must be <strong>between 1 and 30 characters.</strong>
+              >Question must be <strong>between 1 and 80 characters.</strong>
             </mat-error>
           </mat-form-field>
         </form>
@@ -37,7 +37,7 @@
             />
             <mat-hint>Edit vote name.</mat-hint>
             <mat-error [hidden]="voteDirective.valid"
-              >Vote must be <strong>between 1 and 30 characters.</strong>
+              >Vote must be <strong>between 1 and 80 characters.</strong>
             </mat-error>
           </mat-form-field>
           <button mat-raised-button (click)="deleteVote(vote)">X</button>
@@ -57,7 +57,7 @@
             />
             <mat-hint>Add vote to the poll.</mat-hint>
             <mat-error *ngIf="!votesForm.get('formControlVoteName').valid"
-              >Vote must be <strong>between 1 and 30 characters.</strong>
+              >Vote must be <strong>between 1 and 80 characters.</strong>
             </mat-error>
           </mat-form-field>
           <button
