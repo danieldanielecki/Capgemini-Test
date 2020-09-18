@@ -49,6 +49,9 @@ The application is a single page application which is divided in three sections.
 - Given the fact that my time was limited, for a bonus decided to work on UI/UX a bit, instead of performing unit/E2E tests
 - The code is relatively clean with following Dump Components, Separation of Concerns (SoC), Single Responsibility Rule (SRP) as well as you might notice that most of the code follows alphabetical order and meaningful names
 - Git commits also have semantic meaning
+- Disabling fields is partially done, i.e. editable questions and votes are throwing error instead of disabling this completely. Once the edit vote/question input would've been disabled then what would be the desired behaviour with the vote's data as well as possible interaction (adding/deleting vote). It confused me a bit, while asking couple of technical questions I've heard "Actually you can decide to do it the way you want. It does not matter as long as you are able to explain and talk about what you did and how you did it. So its really your choice.". Implementation [wouldn't be too difficult](https://stackoverflow.com/questions/48451206/cannot-disable-matinput-element-with-formcontrolname).
+- Editable input fields have a bit naive validation, was looking into solution related to `FormArrayName`/`FormArray`, but in the current codebase didn't worked out. That's the only one part of the app which I really have to say was a bit too difficult for me.
+- I completely overlooked one feature: "pressing the "vote" button", the voting is done on radio buttons. Sorry for that, realized a bit too late (an hour before deadline). Found [stackblitz](https://stackblitz.com/edit/angular-iknh7w), which a bit modified, should work out, but it's not working and that's the fact. Didn't want ot make last minutes changes.
 
 ### Run this locally
 
