@@ -17,7 +17,7 @@ The application is a single page application which is divided in three sections.
 - As the respondent, I want to send several answers.
 - As the respondent, I want to see the changes in real time.
 
-(Mockup provided)
+![mockup](./mockup.png)
 
 ### Non-functional requirements
 
