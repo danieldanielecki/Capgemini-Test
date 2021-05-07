@@ -62,3 +62,8 @@ The same steps, as for every Angular application:
 3. Run `ng serve` (`Angular CLI` must be installed)
 4. As long as port `4200` is free on your device, then it'll be launched on `localhost:4200`
 5. For SSR: first `npm run build:ssr` then `npm run server:ssr`, as long as port `4000` is free on your device, then it'll be launched on `localhost:4000`. Check page source to see the SSR.
+
+
+### Feedback
+
+No technical feedback, just an information "We should continue with this candidate".
